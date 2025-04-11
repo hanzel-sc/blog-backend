@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                     pkill -f blog-backend.jar || true
-                    cp target/blog-backend.jar ~/deployed/
+                    cp target/blog-backend.jar /var/lib/jenkins/deployed/blog-backend.jar
                     nohup java -jar ~/deployed/blog-backend-0.0.1-SNAPSHOT.jar > ~/deployed/log.txt 2>&1 &
 
                 '''
