@@ -1,0 +1,21 @@
+# compiled output
+/target
+
+# logs
+*.log
+
+# environment variables
+.env
+
+# OS-specific
+.DS_Store
+
+# IDEs/editors
+*.iml
+.idea/
+*.iws
+*.ipr
+.vscode/
+
+# Maven
+.mvn/
