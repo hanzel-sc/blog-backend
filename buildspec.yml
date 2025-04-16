@@ -2,10 +2,15 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      java: corretto21
     commands:
-      - echo Installing JDK 21
-      - sudo apt-get update
-      - sudo apt-get install openjdk-21-jdk
+      - echo Installing Amazon Corretto JDK 21
+      - curl -sL https://corretto.aws/downloads/latest/amazon-corretto-21-x64-linux-jdk.rpm -o corretto.rpm
+      - sudo rpm -ivh corretto.rpm
+      - java -version
+      - echo Installing Maven...
+      - yum install -y maven
   build:
     commands:
       - echo Build started on `date`
