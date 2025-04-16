@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       - echo Installing JDK 21
-      - apt-get update
-      - apt-get install openjdk-21-jdk
+      - sudo apt-get update
+      - sudo apt-get install openjdk-21-jdk
   build:
     commands:
       - echo Build started on `date`
