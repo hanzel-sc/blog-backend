@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto21
+    commands:
+      - echo Installing Maven...
+      - mvn -v
+
+  pre_build:
+    commands:
+      - echo Pre-Build Phase Started...
+      - echo Clean and Validate the Maven project
+      - mvn clean validate
+
+  build:
+    commands:
+      - echo Build Phase Started...
+      - mvn package -DskipTests=true
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - target/blog-backend.jar
