@@ -1,6 +1,11 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo Installing JDK 21
+      - apt-get update
+      - apt-get install openjdk-21-jdk
   build:
     commands:
       - echo Build started on `date`
