@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean package -DskipTests=true
+
+  post_build:
+    commands:
+      - echo Build successfully completed on `date`
+
+artifacts:
+  files:
+    - target/blog-backend.jar
+  discard-paths: yes
