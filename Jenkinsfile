@@ -14,6 +14,14 @@ pipeline {
                 sh "${MAVEN_HOME}/bin/mvn clean install"
             }
         }
+
+        stage('SonarQube Analysis') {
+             steps {
+                 withSonarQubeEnv('SonarQubeServer') {
+                    sh "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                        }
+                    }
+                }
         stage('Deploy') {
             steps {
                 sh '''
