@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         MAVEN_HOME = tool 'Maven 3'
+        SONARQUBE = 'SonarQubeServer'
     }
     stages {
         stage('Checkout') {
