@@ -6,6 +6,7 @@ phases:
       - echo Pre-Build Phase Started...
       - echo Clean and Validate the Maven project
       - mvn clean validate
+      - mvn clean install
 
   build:
     commands:
