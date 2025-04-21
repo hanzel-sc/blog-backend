@@ -21,9 +21,11 @@ pipeline {
                 script {
                     if (isUnix()) {
                         sh "${MAVEN_HOME}/bin/mvn test"
+                        sh "${MAVEN_HOME}/bin/mvn clean verify"
                         sh "${MAVEN_HOME}/bin/mvn clean install"
                     } else {
                         bat "${MAVEN_HOME}/bin/mvn test"
+                        bat "${MAVEN_HOME}/bin/mvn clean verify"
                         bat "${MAVEN_HOME}/bin/mvn clean install"
                     }
                 }
