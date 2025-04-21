@@ -81,6 +81,14 @@ pipeline {
     }
 
     post {
+        success {
+           emailext (
+                  subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                  body: "Build completed successfully.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
+                  to: "devteam@example.com",
+                  replyTo: "hanselkansam@gmail.com"
+                )
+            }
         failure {
             emailext (
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
