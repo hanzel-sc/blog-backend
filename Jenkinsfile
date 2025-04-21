@@ -6,7 +6,7 @@ pipeline {
         SONARQUBE = 'SonarQubeServer'
         SONAR_PROJECT_KEY = 'blog-backend'
         SONAR_HOST_URL = 'http://192.168.25.214:9000'
-        SONAR_TOKEN = credentials('sonar-token')
+        SONAR_TOKEN = 'squ_17ee82724b4d37a85039727c8de2c2091391f904'
     }
 
     stages {
