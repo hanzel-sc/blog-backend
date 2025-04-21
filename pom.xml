@@ -10,6 +10,7 @@
 
     <properties>
         <java.version>8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.1.2</spring.boot.version>
     </properties>
 
@@ -72,6 +73,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.1.2</version>
             </plugin>
 
             <plugin>
@@ -122,6 +124,5 @@
             </plugin>
         </plugins>
     </reporting>
-
 
 </project>
