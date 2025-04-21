@@ -35,14 +35,15 @@ pipeline {
                 withSonarQubeEnv("${env.SONARQUBE}") {
                     script {
                         if (isUnix()) {
-                            sh "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                            sh "${MAVEN_HOME}/bin/mvn sonar:sonar -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_TOKEN} -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
                         } else {
-                            bat "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                            bat "${MAVEN_HOME}\\bin\\mvn sonar:sonar -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_TOKEN} -Dsonar.coverage.jacoco.xmlReportPaths=target\\site\\jacoco\\jacoco.xml"
                         }
                     }
                 }
             }
         }
+
 
         stage('Check Sonar Issues') {
             steps {
@@ -85,7 +86,8 @@ pipeline {
            emailext (
                   subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                   body: "Build completed successfully.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
-                  to: "hanselkansam04@gmail.com"
+                  to: "hanselkansam04@gmail.com",
+                  attachmentsPattern: "target/jacoco-report/index.html"
                 )
             }
         failure {
