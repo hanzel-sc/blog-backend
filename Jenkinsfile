@@ -86,6 +86,7 @@ pipeline {
            emailext (
                   subject: "Hurrah! Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                   body: "Build completed successfully.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
+                  from: "ighdprogeny@gmail.com",
                   to: "marcusfitzerbach@gmail.com",
                   attachmentsPattern: "target/jacoco-report/index.html"
                 )
@@ -94,6 +95,7 @@ pipeline {
             emailext (
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build failed during SonarQube analysis.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
+                from: "ighdprogeny@gmail.com",
                 to: "marcusfitzerbach@gmail.com"
             )
         }
