@@ -34,21 +34,30 @@ pipeline {
         stage('Check Sonar Issues') {
             steps {
                 script {
-                    def count = bat (
+                    def response = bat(
                         script: """
-                        curl -s -u %SONAR_TOKEN%: "%SONAR_HOST_URL%/api/issues/search?componentKeys=%SONAR_PROJECT_KEY%&severities=BLOCKER,CRITICAL" | jq '.total'
+                            curl -s -u ${env.SONAR_TOKEN}: "${env.SONAR_HOST_URL}/api/issues/search?componentKeys=${env.SONAR_PROJECT_KEY}&severities=BLOCKER,CRITICAL"
                         """,
                         returnStdout: true
                     ).trim()
 
-                    if (count.toInteger() > 0) {
-                        error "Build stopped: Found $count critical Sonar issues"
+                    // Simple regex to extract the "total" field from the JSON response
+                    def matcher = response =~ /"total"\s*:\s*(\d+)/
+                    if (matcher.find()) {
+                        def count = matcher.group(1).toInteger()
+                        echo "Found $count critical/blocker issues"
+                        if (count > 0) {
+                            error "Build stopped: Found $count critical Sonar issues"
+                        }
+                    } else {
+                        error "Failed to parse SonarQube response"
                     }
                 }
             }
         }
 
-        stage('Deploy') {
+
+        /*stage('Deploy') {
             steps {
                 bat '''
                 taskkill /F /IM java.exe || echo "No running java process found"
@@ -57,7 +66,7 @@ pipeline {
                 '''
             }
         }
-    }
+    }*/
 
     post {
         failure {
