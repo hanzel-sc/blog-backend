@@ -64,7 +64,7 @@ pipeline {
             emailext (
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build failed during SonarQube analysis.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
-                to: "ighdprogeny@gmail.com"
+                to: "marcusfitzerbach@gmail.com"
             )
         }
     }
