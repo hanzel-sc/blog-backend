@@ -86,7 +86,7 @@ pipeline {
            emailext (
                   subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                   body: "Build completed successfully.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
-                  to: "hanselkansam04@gmail.com",
+                  to: "marcusfitzerbach@gmail.com",
                   attachmentsPattern: "target/jacoco-report/index.html"
                 )
             }
