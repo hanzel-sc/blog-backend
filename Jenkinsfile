@@ -18,15 +18,28 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat "${MAVEN_HOME}/bin/mvn test"
-                bat "${MAVEN_HOME}/bin/mvn clean install"
+                script {
+                    if (isUnix()) {
+                        sh "${MAVEN_HOME}/bin/mvn test"
+                        sh "${MAVEN_HOME}/bin/mvn clean install"
+                    } else {
+                        bat "${MAVEN_HOME}/bin/mvn test"
+                        bat "${MAVEN_HOME}/bin/mvn clean install"
+                    }
+                }
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${env.SONARQUBE}") {
-                    bat "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                    script {
+                        if (isUnix()) {
+                            sh "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                        } else {
+                            bat "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                        }
+                    }
                 }
             }
         }
@@ -56,7 +69,6 @@ pipeline {
             }
         }
 
-
         /*stage('Deploy') {
             steps {
                 bat '''
@@ -65,8 +77,8 @@ pipeline {
                 start java -jar C:\\Jenkins\\deployed\\blog-backend.jar > C:\\Jenkins\\deployed\\log.txt 2>&1
                 '''
             }
-        }
-    }*/
+        }*/
+    }
 
     post {
         failure {
