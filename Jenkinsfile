@@ -32,6 +32,14 @@ pipeline {
             }
         }
 
+            stage('Induce Failure') {
+                steps {
+                    script {
+                        error("Intentionally failing the build!")
+                    }
+                }
+            }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${env.SONARQUBE}") {
