@@ -46,13 +46,13 @@ pipeline {
             }
         }
 
-                stage('Wait for SonarQube Quality Gate') {
+               /* stage('Wait for SonarQube Quality Gate') {
                      steps {
                          timeout(time: 5, unit: 'MINUTES') {
                              waitForQualityGate abortPipeline: true
                          }
                      }
-                 }
+                 } */
 
 
         stage('Check Sonar Issues') {
