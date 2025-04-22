@@ -48,7 +48,7 @@ pipeline {
 
                 stage('Wait for SonarQube Quality Gate') {
                      steps {
-                         timeout(time: 7, unit: 'MINUTES') {
+                         timeout(time: 6, unit: 'MINUTES') {
                              waitForQualityGate abortPipeline: true
                          }
                      }
