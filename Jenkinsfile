@@ -32,14 +32,6 @@ pipeline {
             }
         }
 
-        stage('Wait for SonarQube Quality Gate') {
-             steps {
-                 timeout(time: 2, unit: 'MINUTES') {
-                     waitForQualityGate abortPipeline: true
-                 }
-             }
-         }
-
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${env.SONARQUBE}") {
@@ -53,6 +45,14 @@ pipeline {
                 }
             }
         }
+
+                stage('Wait for SonarQube Quality Gate') {
+                     steps {
+                         timeout(time: 2, unit: 'MINUTES') {
+                             waitForQualityGate abortPipeline: true
+                         }
+                     }
+                 }
 
 
         stage('Check Sonar Issues') {
