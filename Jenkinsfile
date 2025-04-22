@@ -98,6 +98,7 @@ pipeline {
                   body: "Build completed successfully.\n\n",
                   from: "ighdprogeny@gmail.com",
                   to: "hanselkansam04@gmail.com",
+                  replyTo:"marcusfitzerbach@gmail.com",
                   attachmentsPattern: "target/jacoco-report/index.html, target/jacoco-report/jacoco.xml"
                 )
             }
@@ -107,6 +108,7 @@ pipeline {
                 body: "Build failed during SonarQube analysis.\n\n",
                 from: "ighdprogeny@gmail.com",
                 to: "hanselkansam04@gmail.com",
+                replyTo:"marcusfitzerbach@gmail.com",
                 attachmentsPattern: "target/jacoco-report/index.html, target/jacoco-report/jacoco.xml"
             )
         }
