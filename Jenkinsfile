@@ -98,7 +98,7 @@ pipeline {
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build failed during SonarQube analysis.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
                 from: "ighdprogeny@gmail.com",
-                to: "marcusfitzerbach@gmail.com"
+                to: "marcusfitzerbach@gmail.com",
                 attachmentsPattern: "target/jacoco-report/index.html"
             )
         }
