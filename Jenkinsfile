@@ -86,7 +86,7 @@ pipeline {
     post {
         success {
            emailext (
-                  subject: "Hurrah! Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                  subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                   body: "Build completed successfully.\n\nSonar Dashboard: ${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}",
                   from: "ighdprogeny@gmail.com",
                   to: "marcusfitzerbach@gmail.com",
