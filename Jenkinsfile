@@ -94,11 +94,11 @@ pipeline {
     post {
         success {
            emailext (
-                  subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                  subject: "Build Success: ${env.JOB_NAME}",
                   body: "Build completed successfully.\n\n",
                   from: "ighdprogeny@gmail.com",
-                  to: "hanselkansam04@gmail.com",
-                  replyTo:"marcusfitzerbach@gmail.com",
+                  to: "muralimohanm@clahantechnologies.com",
+                  replyTo:"hanselkansam04@gmail.com",
                   attachmentsPattern: "target/jacoco-report/index.html, target/jacoco-report/jacoco.xml"
                 )
             }
@@ -107,8 +107,8 @@ pipeline {
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: "Build failed during SonarQube analysis.\n\n",
                 from: "ighdprogeny@gmail.com",
-                to: "hanselkansam04@gmail.com",
-                replyTo:"marcusfitzerbach@gmail.com",
+                to: "muralimohanm@clahantechnologies.com",
+                replyTo:"hanselkansam04@gmail.com",
                 attachmentsPattern: "target/jacoco-report/index.html, target/jacoco-report/jacoco.xml"
             )
         }
