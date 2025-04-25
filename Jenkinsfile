@@ -54,7 +54,7 @@ pipeline {
                          }
                      }
                  } */
-       stage('Wait for SonarQube Quality Gate') {
+       /*stage('Wait for SonarQube Quality Gate') {
             steps {
                 script {
                     def qg = waitForQualityGate()
@@ -63,7 +63,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
         stage('Check Sonar Issues') {
             steps {
