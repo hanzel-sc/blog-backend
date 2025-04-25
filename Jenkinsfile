@@ -54,7 +54,16 @@ pipeline {
                          }
                      }
                  } */
-
+       stage('Wait for SonarQube Quality Gate') {
+            steps {
+                script {
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "SonarQube Quality Gate failed: ${qg.status}"
+                    }
+                }
+            }
+        }
 
         stage('Check Sonar Issues') {
             steps {
