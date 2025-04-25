@@ -56,6 +56,7 @@ pipeline {
                  } */
        /*stage('Wait for SonarQube Quality Gate') {
             steps {
+            timeout(time: 5, unit: 'MINUTES')
                 script {
                     def qg = waitForQualityGate()
                     if (qg.status != 'OK') {
@@ -105,7 +106,7 @@ pipeline {
         success {
            emailext (
                   subject: "Build Success: ${env.JOB_NAME}",
-                  body: "Build completed successfully\n\n",
+                  body: "Build completed successfully!!\n\n",
                   from: "ighdprogeny@gmail.com",
                   to: "hanselkansam04@gmail.com",
                   replyTo:"hanselkansam04@gmail.com",
