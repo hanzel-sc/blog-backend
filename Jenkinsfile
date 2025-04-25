@@ -40,7 +40,7 @@ pipeline {
                         if (isUnix()) {
                             sh "${MAVEN_HOME}/bin/mvn sonar:sonar -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_TOKEN} -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
                         } else {
-                            bat "${MAVEN_HOME}\\bin\\mvn sonar:sonar -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_TOKEN} -Dsonar.coverage.jacoco.xmlReportPaths=target\\site\\jacoco\\jacoco.xml"
+                            bat "${MAVEN_HOME}\\bin\\mvn sonar:sonar -Dsonar.projectKey=${env.SONAR_PROJECT_KEY} -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_TOKEN} -Dsonar.coverage.jacoco.xmlReportPaths=target\\jacoco-report\\jacoco.xml"
                         }
                     }
                 }
