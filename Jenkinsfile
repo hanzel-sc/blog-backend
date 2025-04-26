@@ -27,7 +27,6 @@ pipeline {
                         bat "${MAVEN_HOME}/bin/mvn test"
                         bat "${MAVEN_HOME}/bin/mvn clean verify"
                         bat "${MAVEN_HOME}/bin/mvn clean install"
-                        bat "${MAVEN_HOME}/bin/mvn clean package"
                     }
                 }
             }
