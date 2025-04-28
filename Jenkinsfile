@@ -5,8 +5,8 @@ pipeline {
         MAVEN_HOME = tool 'Maven 3'
         SONARQUBE = 'SonarQubeServer'
         SONAR_PROJECT_KEY = 'blog-backend'
-        SONAR_HOST_URL = 'http://192.168.25.214:9000'
-        SONAR_TOKEN = 'squ_17ee82724b4d37a85039727c8de2c2091391f904'
+        SONAR_HOST_URL = 'http://13.49.23.131:9000'
+        SONAR_TOKEN = 'sqp_7c4b07f24955a453ed2bbd33315cc5ec98f38e8c'
     }
 
     stages {
