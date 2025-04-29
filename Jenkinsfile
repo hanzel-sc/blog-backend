@@ -19,11 +19,6 @@ pipeline {
             }
         }
 
-tools {
-    terraform 'Terraform'
-}
-
-...
 
 stage('Terraform Apply') {
     steps {
