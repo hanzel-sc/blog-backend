@@ -20,13 +20,15 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
+                        // Linux commands
                         sh "${MAVEN_HOME}/bin/mvn test"
                         sh "${MAVEN_HOME}/bin/mvn clean verify"
                         sh "${MAVEN_HOME}/bin/mvn clean install"
                     } else {
-                        bat "${MAVEN_HOME}/bin/mvn test"
-                        bat "${MAVEN_HOME}/bin/mvn clean verify"
-                        bat "${MAVEN_HOME}/bin/mvn clean install"
+                        // Windows commands
+                        bat "${MAVEN_HOME}\\bin\\mvn test"
+                        bat "${MAVEN_HOME}\\bin\\mvn clean verify"
+                        bat "${MAVEN_HOME}\\bin\\mvn clean install"
                     }
                 }
             }
@@ -46,36 +48,16 @@ pipeline {
             }
         }
 
-               /* stage('Wait for SonarQube Quality Gate') {
-                     steps {
-                         timeout(time: 5, unit: 'MINUTES') {
-                             waitForQualityGate abortPipeline: true
-                         }
-                     }
-                 } */
-       /*stage('Wait for SonarQube Quality Gate') {
-            steps {
-            timeout(time: 5, unit: 'MINUTES')
-                script {
-                    def qg = waitForQualityGate()
-                    if (qg.status != 'OK') {
-                        error "SonarQube Quality Gate failed: ${qg.status}"
-                    }
-                }
-            }
-        }*/
-
         stage('Check Sonar Issues') {
             steps {
                 script {
-                    def response = bat(
+                    def response = sh(
                         script: """
                             curl -s -u ${env.SONAR_TOKEN}: "${env.SONAR_HOST_URL}/api/issues/search?componentKeys=${env.SONAR_PROJECT_KEY}&severities=BLOCKER,CRITICAL"
                         """,
                         returnStdout: true
                     ).trim()
 
-                    // Simple regex to extract the "total" field from the JSON response
                     def matcher = response =~ /"total"\s*:\s*(\d+)/
                     if (matcher.find()) {
                         def count = matcher.group(1).toInteger()
@@ -89,29 +71,19 @@ pipeline {
                 }
             }
         }
-
-        /*stage('Deploy') {
-            steps {
-                bat '''
-                taskkill /F /IM java.exe || echo "No running java process found"
-                copy target\\blog-backend.jar C:\\Jenkins\\deployed\\blog-backend.jar
-                start java -jar C:\\Jenkins\\deployed\\blog-backend.jar > C:\\Jenkins\\deployed\\log.txt 2>&1
-                '''
-            }
-        }*/
     }
 
     post {
         success {
-           emailext (
-                  subject: "Build Success: ${env.JOB_NAME}",
-                  body: "Build completed successfully!\n\n",
-                  from: "ighdprogeny@gmail.com",
-                  to: "hanselkansam04@gmail.com",
-                  replyTo:"hanselkansam04@gmail.com",
-                  attachmentsPattern: "target/jacoco-report/index.html, target/jacoco-report/jacoco.xml"
-                )
-            }
+            emailext (
+                subject: "Build Success: ${env.JOB_NAME}",
+                body: "Build completed successfully!\n\n",
+                from: "ighdprogeny@gmail.com",
+                to: "hanselkansam04@gmail.com",
+                replyTo:"hanselkansam04@gmail.com",
+                attachmentsPattern: "target/jacoco-report/index.html, target/jacoco-report/jacoco.xml"
+            )
+        }
         failure {
             emailext (
                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
