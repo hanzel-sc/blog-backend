@@ -8,6 +8,9 @@ pipeline {
         SONAR_HOST_URL = 'http://13.51.0.162:9000'
         SONAR_TOKEN = 'sqp_3e19a648885fc58b81ac576b2ece1896f719b514'
     }
+    tools {
+        terraform 'Terraform'
+    }
 
     stages {
         stage('Checkout') {
@@ -16,19 +19,26 @@ pipeline {
             }
         }
 
+tools {
+    terraform 'Terraform'
+}
+
+...
+
 stage('Terraform Apply') {
     steps {
         script {
             withCredentials([usernamePassword(credentialsId: 'aws-creds', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                 dir('infrastructure') {
-                    // Initialize Terraform and apply changes
-                    sh 'terraform init'
-                    sh 'terraform apply -auto-approve'
+                    def tfHome = tool 'Terraform'
+                    sh "${tfHome}/terraform init"
+                    sh "${tfHome}/terraform apply -auto-approve"
                 }
             }
         }
     }
 }
+
 
 
         stage('Build') {
