@@ -16,6 +16,22 @@ pipeline {
             }
         }
 
+    stage('Terraform Apply') {
+                    steps {
+                        script {
+
+                            withCredentials([usernamePassword(credentialsId: 'aws-creds', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')])
+
+                                dir('infrastructure') {
+                                    // Initialize Terraform and apply changes
+                                    sh 'terraform init'
+                                    sh 'terraform apply -auto-approve'
+                                }
+                            }
+                        }
+                    }
+                }
+
         stage('Build') {
             steps {
                 script {
