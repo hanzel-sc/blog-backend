@@ -43,12 +43,11 @@ pipeline {
                     }
                 }
         stage('Publish Reports') {
-                    steps {
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/home/zwi', reportFiles: 'terrascan_report.json', reportName: 'Terrascan Report'])
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/home/zwi', reportFiles: 'tfsec_report.json', reportName: 'Tfsec Report'])
-                    }
-                }
+            steps {
+                archiveArtifacts artifacts: 'reports/*.json', fingerprint: true
             }
         }
+    }
+}
 
 

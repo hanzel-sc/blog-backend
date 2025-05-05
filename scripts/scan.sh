@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Running basic Terrascan scan
-terrascan scan -t aws -d infrastructure/ -o json > /home/zwi/terrascan_report.json
+mkdir -p reports
 
-# Running basic Tfsec scan
-tfsec infrastructure/ --format json > /home/zwi/tfsec_report.json
+# Running terrascan scan
+/usr/local/bin/terrascan scan -t aws -d terraform/ -o json > reports/terrascan_report.json
+
+#Running TFsec scan
+/usr/local/bin/tfsec terraform/ --format json > reports/tfsec_report.json
+
+echo "Terrascan and tfsec reports saved to $(pwd)/reports/"
+
