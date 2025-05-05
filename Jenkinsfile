@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('Run Scan') {
+        stage('Run Pentest Scan') {
                     steps {
                         sh 'chmod +x scripts/scan.sh'
                         sh './scripts/scan.sh'
