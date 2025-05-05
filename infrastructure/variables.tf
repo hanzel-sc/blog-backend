@@ -7,6 +7,7 @@ variable "key_name" {
     description = "EC2 key pair"
     type = string
     default     = "test-aws"   
-  
+
+
 }
 
